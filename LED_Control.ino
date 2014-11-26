@@ -7,7 +7,14 @@ char mode = '1';
 char charByte;
 unsigned char inByte;
 long startTime;
+
 int numColors;
+int customColor8_1;
+int customColor8_2;
+int customColor8_3;
+int customColor8_4;
+int customColor8_5;
+
 typedef struct
 {
   byte  x, y, z;
@@ -207,7 +214,7 @@ void traverse(int dx, int dy, int dz)
     analogWrite(b, v.z);
     
     startTime = millis();
-    while (millis() < startTime + TRANSITION_DELAY && mode == '5'){   // wait fot the transition delay
+    while (millis() < startTime + TRANSITION_DELAY && mode == '5'){   // wait for the transition delay
       getByte();
     }
     if (mode != '5'){
@@ -231,11 +238,78 @@ void getByte(){
       mode = charByte;
       if (mode = 8){
           inByte = Serial.read();
-          charByte = char(inByte);
-          numColors = int(charByte);
-          while (numColors > 0){
-            
-            numColors = numColors - 1;
+          numColors = char(inByte);
+          
+          switch(numColors){
+              case '1':
+                  {
+                    inByte = Serial.read();
+                    customColor8_1 = char(inByte);
+                    inByte = Serial.read();
+                    customColor8_2 = -1;
+                    inByte = Serial.read();
+                    customColor8_3 = -1;
+                    inByte = Serial.read();
+                    customColor8_4 = -1;
+                    inByte = Serial.read();
+                    customColor8_5 = -1;
+                  }
+          
+              case '2':
+                  {
+                    inByte = Serial.read();
+                    customColor8_1 = char(inByte);
+                    inByte = Serial.read();
+                    customColor8_2 = char(inByte);
+                    inByte = Serial.read();
+                    customColor8_3 = -1;
+                    inByte = Serial.read();
+                    customColor8_4 = -1;
+                    inByte = Serial.read();
+                    customColor8_5 = -1;
+                  }
+                  
+              case '3':
+                  {
+                    inByte = Serial.read();
+                    customColor8_1 = char(inByte);
+                    inByte = Serial.read();
+                    customColor8_2 = char(inByte);
+                    inByte = Serial.read();
+                    customColor8_3 = char(inByte);
+                    inByte = Serial.read();
+                    customColor8_4 = -1;
+                    inByte = Serial.read();
+                    customColor8_5 = -1;
+                  }
+                  
+              case '4':
+                  {
+                    inByte = Serial.read();
+                    customColor8_1 = char(inByte);
+                    inByte = Serial.read();
+                    customColor8_2 = char(inByte);
+                    inByte = Serial.read();
+                    customColor8_3 = char(inByte);
+                    inByte = Serial.read();
+                    customColor8_4 = char(inByte);
+                    inByte = Serial.read();
+                    customColor8_5 = -1;
+                  }
+                  
+              case '5':
+                  {
+                    inByte = Serial.read();
+                    customColor8_1 = char(inByte);
+                    inByte = Serial.read();
+                    customColor8_2 = char(inByte);
+                    inByte = Serial.read();
+                    customColor8_3 = char(inByte);
+                    inByte = Serial.read();
+                    customColor8_4 = char(inByte);
+                    inByte = Serial.read();
+                    customColor8_5 = char(inByte);
+                  }
           }
       }
     }
