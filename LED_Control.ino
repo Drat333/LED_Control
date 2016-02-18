@@ -188,6 +188,12 @@ void loop()
         getByte();
         break;
         }
+    default:                    //LEDs OFF
+        analogWrite(r, 0);
+        analogWrite(g, 0);
+        analogWrite(b, 0);
+        getByte();
+      break;
   }
 }
 
@@ -224,8 +230,15 @@ void getByte(){
     inByte = Serial.read();
     charByte = char(inByte);
     Serial.println(charByte);
-    if (mode != charByte){
-      mode = charByte;
+    mode = charByte;
+    if (mode == 'c'){
+      getColors();
     }
   }
+}
+
+void getColors(){
+  //while (true){
+          
+  //}
 }
