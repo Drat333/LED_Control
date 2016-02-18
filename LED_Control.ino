@@ -8,6 +8,7 @@ const int b =  22;
 char mode = '5';
 char charByte;
 unsigned char inByte;
+int customColors[10];
 long startTime;
 typedef struct
 {
@@ -188,6 +189,10 @@ void loop()
         getByte();
         break;
         }
+    case 'c':
+      {
+        getByte();
+      }
     default:                    //LEDs OFF
         analogWrite(r, 0);
         analogWrite(g, 0);
