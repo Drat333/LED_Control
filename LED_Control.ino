@@ -1,13 +1,14 @@
+#include <FastSPI_LED.h>
+
 #include <time.h>;
 
 const int r =  21;
 const int g =  20;
 const int b =  22;
-char mode = '1';
+char mode = '5';
 char charByte;
 unsigned char inByte;
 long startTime;
-int numColors;
 typedef struct
 {
   byte  x, y, z;
@@ -187,10 +188,6 @@ void loop()
         getByte();
         break;
         }
-    case '8':                    //LEDs Custom Fade
-        {
-        getByte();
-        }
   }
 }
 
@@ -229,15 +226,6 @@ void getByte(){
     Serial.println(charByte);
     if (mode != charByte){
       mode = charByte;
-      if (mode = 8){
-          inByte = Serial.read();
-          charByte = char(inByte);
-          numColors = int(charByte);
-          while (numColors > 0){
-            
-            numColors = numColors - 1;
-          }
-      }
     }
   }
 }
