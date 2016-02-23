@@ -8,7 +8,8 @@ const int b =  22;
 char mode = '5';
 char charByte;
 unsigned char inByte;
-int customColors[10];
+int customColor[3];
+int customFadeColors[30];
 long startTime;
 typedef struct
 {
@@ -190,6 +191,12 @@ void loop()
         break;
         }
     case 'c':
+        analogWrite(r, customColor[0]);
+        analogWrite(g, customColor[1]);
+        analogWrite(b, customColor[2]);
+        getByte();
+      break;
+    case 'f':
       {
         getByte();
       }
@@ -215,7 +222,7 @@ void traverse(int dx, int dy, int dz)
     analogWrite(b, v.z);
     
     startTime = millis();
-    while (millis() < startTime + TRANSITION_DELAY && mode == '5'){   // wait fot the transition delay
+    while (millis() < startTime + TRANSITION_DELAY && mode == '5'){   // wait for the transition delay
       getByte();
     }
     if (mode != '5'){
@@ -237,12 +244,28 @@ void getByte(){
     Serial.println(charByte);
     mode = charByte;
     if (mode == 'c'){
-      getColors();
+      getColor();
+    }
+    if (mode == 'f'){
+      getFadeColors();
     }
   }
 }
 
-void getColors(){
+void getColor(){
+  for (int i = 0; i < 3; i++){
+    int tempColor = 0;
+    for (int j = 100; j >= 1; j = j / 10){
+      inByte = Serial.read();
+      charByte = char(inByte);
+      tempColor = tempColor + ((charByte - '0') * j);
+    }
+    Serial.println(tempColor);
+    customColor[i] = tempColor;
+  }
+}
+
+void getFadeColors(){
   //while (true){
           
   //}
