@@ -62,6 +62,7 @@ void loop()
         getByte();
       break;
     case '5':                    //LEDs Rainbow
+      //The code for this section is adapted from code by a forum poster
         {
         #define  MIN_RGB_VALUE  10   // no smaller than 0. 
         #define  MAX_RGB_VALUE  255  // no bigger than 255.
